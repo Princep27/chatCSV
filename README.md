@@ -25,20 +25,45 @@ AI CSV Chat is a lightweight GenAI application that allows users to upload CSV o
 
 ## How It Works
 
+
 ```text
-Upload File
-      ↓
-Load into DuckDB
-      ↓
-LLM Generates SQL
-      ↓
-Validate SQL
-      ↓
-Execute Query
-      ↓
-Display Results
-      ↓
-(Optional) AI Explanation
+               Upload CSV / Excel
+                        │
+                        ▼
+                  Pandas DataFrame
+                        │
+                        ▼
+            Data Cleaning & Validation
+                        │
+                        ▼
+              Embedded DuckDB Database
+                        │
+                        ▼
+          Build Schema + Sample Context
+                        │
+                        ▼
+                  LLM Generates SQL
+                        │
+                        ▼
+                 SQL Validation Layer
+                        │
+                        ▼
+               Execute Query in DuckDB
+                        │
+            ┌───────────┴───────────┐
+            │                       │
+            ▼                       ▼
+     Complete Result          Auto Visualization
+            │
+            ▼
+   Small Result (≤10 rows)?
+            │
+      ┌─────┴─────┐
+      │           │
+     Yes         No
+      │           │
+      ▼           ▼
+ LLM Explanation  Show Result Only
 ```
 
 ## Run Locally
